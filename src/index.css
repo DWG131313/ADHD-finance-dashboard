@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* Custom theme variables */
+@theme {
+  --color-background: #1a1a2e;
+  --color-background-card: #16213e;
+  --color-accent: #4361ee;
+  --color-success: #06d6a0;
+  --color-warning: #ffd166;
+  --color-danger: #ef476f;
+  --color-text: #e8e8e8;
+  --color-text-muted: #9ca3af;
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ============================================
+   ADHD UX Animations
+   ============================================ */
+
+/* Celebration bounce for milestone achievements */
+@keyframes celebrate-bounce {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(1.02); }
+  75% { transform: scale(1.04); }
+}
+
+/* Shimmer effect for progress bars */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Fade up animation for balance changes */
+@keyframes fade-up {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Checkmark drawing animation */
+@keyframes checkmark-draw {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Pulse glow effect */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(6, 214, 160, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(6, 214, 160, 0); }
+}
+
+/* Utility classes for animations */
+.animate-celebrate {
+  animation: celebrate-bounce 0.6s ease-in-out;
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 1s ease-out forwards;
+}
+
+/* Popup entrance animation */
+@keyframes popup-in {
+  0% { opacity: 0; transform: scale(0.95) translateY(-5px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-popup-in {
+  animation: popup-in 0.15s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Button interaction improvements */
+.btn-interactive {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-interactive:hover {
+  transform: scale(1.02);
+}
+
+.btn-interactive:active {
+  transform: scale(0.98);
+}
+
+/* Progress bar enhancements */
+.progress-bar-enhanced {
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Card hover micro-interactions */
+.card-interactive {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3),
+              0 4px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   Reduced Motion Support
+   Respects user preference for less animation
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable decorative animations */
+  .animate-celebrate,
+  .animate-shimmer::after,
+  .animate-fade-up,
+  .animate-pulse-glow,
+  .animate-popup-in {
+    animation: none !important;
+  }
+
+  /* Make transitions instant */
+  .btn-interactive,
+  .progress-bar-enhanced,
+  .card-interactive {
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Disable card hover lift */
+  .card-interactive:hover {
+    transform: none;
+  }
+
+  /* Hide shimmer overlay */
+  .animate-shimmer::after {
+    display: none;
+  }
+}
