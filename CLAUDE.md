@@ -6,6 +6,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal finance dashboard built with React + Vite. Imports transaction data from Copilot (finance app) CSV exports and provides budget tracking, debt monitoring, and spending analysis.
 
+## Deployment
+
+- **Live URL:** https://danny-finance-dashboard.vercel.app
+- **GitHub:** https://github.com/DWG131313/danny-finance-dashboard (private)
+- **Deploy:** Run `vercel --prod` from project root
+- **PWA:** Installable on mobile/desktop via browser install prompt
+
+## Privacy - CRITICAL
+
+**NEVER commit real financial data.** All user data lives in localStorage only.
+
+- `src/data/sampleTransactions.js` - Must contain ONLY generic placeholder data
+- `Import Data/` - Gitignored, contains user's CSV exports
+- `Screenshots/` - Gitignored
+- `*.csv` - Gitignored
+
+If you see real transaction names, amounts, employer info, or debt balances in the codebase, that's a privacy leak that needs immediate fixing.
+
 ## Commands
 
 ```bash
@@ -49,3 +67,30 @@ Parses Copilot CSV exports with columns: date, name, amount, status, category, p
 - Budget has two phases: Phase 1 (debt payoff mode, tighter budgets) and Phase 2 (post-debt, relaxed)
 - Transactions are auto-excluded if: marked excluded, income type, internal transfer, negative amount, or matches payment patterns (credit card payments, loan payments)
 - Month selection affects all budget/spending calculations throughout the app
+
+## Features
+
+### Weekly Rollover Budgets
+Weekly surplus/deficit carries forward within the month. If you underspend week 1, the extra rolls into week 2. Controlled via `enableRollover` setting in useBudget. UI toggle in BudgetCard.
+
+### Demo Mode
+Toggle in Dashboard header shows simulated data without affecting real localStorage data. Uses `sessionStorage` so it resets on tab close. Demo data generated in `src/data/demoData.js`.
+
+### Focus Mode
+Quick daily view with:
+- Time-aware greeting
+- Daily/weekly budget toggle (respects rollover setting)
+- Payday countdown and next bill reminder
+- Spending streaks
+- Direct debt balance updates
+
+### PWA Support
+- `public/manifest.json` - App metadata and icons
+- `public/sw.js` - Service worker (network-first, cache fallback)
+- `public/icons/` - App icons (SVG, 192px, 512px PNG)
+
+## Browser Notes
+
+Safari may have issues with Vite dev server HMR. If the app won't load in Safari during development, try:
+- Using `127.0.0.1:5173` instead of `localhost:5173`
+- Testing in Chrome during development, Safari for production builds
