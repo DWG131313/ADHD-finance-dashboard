@@ -211,6 +211,88 @@ When marking something complete or positive:
 
 ---
 
+### 1.6 Icon Tooltips Throughout UI
+
+**Why it matters:** Icons without labels force users to guess or remember what they do. This adds unnecessary cognitive load—a core ADHD challenge. Tooltips provide instant clarity on hover/focus.
+
+**What to build:**
+
+#### A. Tooltip Component
+Create a reusable `Tooltip.jsx` component:
+
+```jsx
+// Usage: <Tooltip text="Settings"><button>...</button></Tooltip>
+export function Tooltip({ children, text, position = 'bottom' }) {
+  return (
+    <div className="relative group">
+      {children}
+      <div className={`
+        absolute z-50 px-2 py-1 text-sm text-white bg-gray-900 rounded shadow-lg
+        opacity-0 group-hover:opacity-100 group-focus-within:opacity-100
+        transition-opacity duration-150 delay-300
+        pointer-events-none whitespace-nowrap
+        ${position === 'bottom' ? 'top-full mt-2 left-1/2 -translate-x-1/2' : ''}
+        ${position === 'top' ? 'bottom-full mb-2 left-1/2 -translate-x-1/2' : ''}
+        ${position === 'left' ? 'right-full mr-2 top-1/2 -translate-y-1/2' : ''}
+        ${position === 'right' ? 'left-full ml-2 top-1/2 -translate-y-1/2' : ''}
+      `}>
+        {text}
+        {/* Arrow */}
+        <div className={`
+          absolute w-2 h-2 bg-gray-900 rotate-45
+          ${position === 'bottom' ? '-top-1 left-1/2 -translate-x-1/2' : ''}
+          ${position === 'top' ? '-bottom-1 left-1/2 -translate-x-1/2' : ''}
+          ${position === 'left' ? '-right-1 top-1/2 -translate-y-1/2' : ''}
+          ${position === 'right' ? '-left-1 top-1/2 -translate-y-1/2' : ''}
+        `} />
+      </div>
+    </div>
+  );
+}
+```
+
+#### B. Header Icons to Update (Dashboard.jsx)
+
+| Icon | Current `aria-label` | Tooltip Text |
+|------|---------------------|--------------|
+| Left arrow | "Previous month" | "Previous month" |
+| Right arrow | "Next month" | "Next month" |
+| Settings gear | "Settings" | "Settings" |
+
+#### C. Other Icons Throughout App
+
+Audit and add tooltips to:
+
+| Location | Icon | Tooltip Text |
+|----------|------|--------------|
+| DebtTracker | Edit button | "Edit debt balances" |
+| IncomeCard | Remove (×) button | "Remove this income" |
+| TransactionList | Filter icon (if any) | "Filter transactions" |
+| View tabs | Each tab icon | Already has text, but ensure icon+text are clear |
+| BudgetCard | Status badge | "Your spending pace vs. expected" |
+| CategoryBudgets | Category color dots | Category name if not obvious |
+
+#### D. Tooltip Behavior
+- **Delay:** 300ms before showing (prevents flicker on quick mouse movement)
+- **Keyboard accessible:** Show on focus, not just hover
+- **Touch devices:** Consider tap-and-hold or skip tooltips (labels should be visible)
+- **Animation:** Fade in, no jarring pop
+
+#### E. Alternative: Icon + Text Labels
+For the most important actions, consider replacing icon-only buttons with icon+text:
+
+```jsx
+// Instead of just gear icon:
+<button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700">
+  <SettingsIcon className="w-4 h-4" />
+  <span className="text-sm">Settings</span>
+</button>
+```
+
+This is more ADHD-friendly than tooltips because it requires zero discovery. Trade-off is more horizontal space.
+
+---
+
 ## Priority Tier 2: Important Enhancements
 
 These features significantly improve the experience but aren't blocking.
@@ -449,7 +531,8 @@ src/components/
 ├── AchievementBadge.jsx        # Individual badge display
 ├── AchievementBar.jsx          # Row of achievement badges
 ├── QuickUpdateModal.jsx        # Fast balance update flow
-└── StreakCounter.jsx           # Streak display component
+├── StreakCounter.jsx           # Streak display component
+└── Tooltip.jsx                 # Reusable tooltip wrapper
 
 src/hooks/
 ├── useMilestones.js            # Milestone tracking logic
@@ -505,6 +588,7 @@ Add to `index.css`:
 - [ ] 1.3 Focus mode toggle
 - [ ] 1.4 "Money crushed" reframing
 - [ ] 1.5 Enhanced microinteractions
+- [ ] 1.6 Icon tooltips throughout UI
 
 ### Tier 2 (Do Next)
 - [ ] 2.1 Compassionate copy refresh
