@@ -162,16 +162,11 @@ function EventPopup({ events, currentIndex, onIndexChange, position, onClose }) 
  */
 const DEFAULT_RECURRING_BILLS = [
   // Fixed monthly bills
-  { name: 'Rent', amount: 3675, dayOfMonth: 2, type: 'bill' },
-  { name: 'Lending Club', amount: 609, dayOfMonth: 4, type: 'bill' },
-  { name: 'Student Loan', amount: 577.82, dayOfMonth: 14, type: 'bill' },
-  { name: 'Pet Insurance', amount: 137.36, dayOfMonth: 15, type: 'bill' },
-  { name: 'Car Insurance', amount: 123.93, dayOfMonth: 16, type: 'bill' },
-  { name: 'Comcast', amount: 103, dayOfMonth: 4, type: 'bill' },
-  { name: 'AT&T', amount: 112, dayOfMonth: 30, type: 'bill' },
-
-  // Seasonal/variable - using average
-  { name: 'PSE', amount: 80, dayOfMonth: 13, type: 'bill', note: 'Seasonal - varies' },
+  { name: 'Rent', amount: 1500, dayOfMonth: 1, type: 'bill' },
+  { name: 'Loan Payment', amount: 500, dayOfMonth: 15, type: 'bill' },
+  { name: 'Internet', amount: 75, dayOfMonth: 12, type: 'bill' },
+  { name: 'Electric', amount: 100, dayOfMonth: 18, type: 'bill' },
+  { name: 'Phone', amount: 80, dayOfMonth: 20, type: 'bill' },
 
   // Bi-monthly utilities (every other month)
   { name: 'Seattle City Light', amount: 200, dayOfMonth: 7, type: 'bill', frequency: 'bimonthly-even' },

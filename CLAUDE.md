@@ -9,7 +9,7 @@ Personal finance dashboard built with React + Vite. Imports transaction data fro
 ## Deployment
 
 - **Live URL:** https://danny-finance-dashboard.vercel.app
-- **GitHub:** https://github.com/DWG131313/danny-finance-dashboard (private)
+- **GitHub:** https://github.com/DWG131313/ADHD-finance-dashboard (private)
 - **Deploy:** Run `vercel --prod` from project root
 - **PWA:** Installable on mobile/desktop via browser install prompt
 

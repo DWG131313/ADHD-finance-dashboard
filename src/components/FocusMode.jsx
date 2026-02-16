@@ -55,14 +55,12 @@ function getNextPaycheck() {
  */
 function getNextBill() {
   const bills = [
-    { name: 'Rent', amount: 3675, dayOfMonth: 2 },
-    { name: 'Lending Club', amount: 609, dayOfMonth: 4 },
-    { name: 'Comcast', amount: 103, dayOfMonth: 4 },
-    { name: 'PSE', amount: 80, dayOfMonth: 13 },
-    { name: 'Student Loan', amount: 577.82, dayOfMonth: 14 },
-    { name: 'Pet Insurance', amount: 137.36, dayOfMonth: 15 },
-    { name: 'Car Insurance', amount: 123.93, dayOfMonth: 16 },
-    { name: 'AT&T', amount: 112, dayOfMonth: 30 },
+    { name: 'Rent', amount: 1500, dayOfMonth: 1 },
+    { name: 'Loan Payment', amount: 500, dayOfMonth: 15 },
+    { name: 'Internet', amount: 75, dayOfMonth: 12 },
+    { name: 'Electric', amount: 100, dayOfMonth: 18 },
+    { name: 'Phone', amount: 80, dayOfMonth: 20 },
+    { name: 'Insurance', amount: 150, dayOfMonth: 25 },
   ];
 
   const today = new Date();

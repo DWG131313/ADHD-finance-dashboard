@@ -6,46 +6,46 @@ const DEBT_HISTORY_KEY = 'finance-debt-history';
 
 /**
  * Default debt configuration
- * 
+ *
  * Categories:
  * - targetDebt: Credit cards being aggressively paid off (May 2026 goal)
- * - managedDebt: Under control, just maintaining (Apple Card)
- * - termLoan: Fixed-term loans with regular payments (Personal Loan)
+ * - managedDebt: Under control, just maintaining
+ * - termLoan: Fixed-term loans with regular payments
  */
 const DEFAULT_DEBTS = {
-  appleCard: {
-    name: 'Apple Card',
-    original: 750,
+  creditCard1: {
+    name: 'Credit Card 1',
+    original: 5000,
+    current: 3500,
+    apr: 18,
+    note: 'Example credit card',
+    category: 'target', // Part of May 2026 goal
+    color: '#ef476f', // Red
+  },
+  creditCard2: {
+    name: 'Credit Card 2',
+    original: 8000,
+    current: 5000,
+    apr: 22,
+    note: 'Example rewards card',
+    category: 'target', // Part of May 2026 goal
+    color: '#4361ee', // Blue
+  },
+  storeCard: {
+    name: 'Store Card',
+    original: 1200,
     current: 0, // Paid off!
     apr: 0,
-    note: 'Paid off - now just subscriptions & installments',
+    note: 'Paid off example',
     category: 'managed', // Under control, not part of payoff goal
     color: '#22c55e', // Green - paid off
   },
-  bofaAtmos: {
-    name: 'BofA Atmos',
-    original: 3657,
-    current: 2905,
-    apr: 20,
-    note: 'High APR - pay off fast',
-    category: 'target', // Part of May 2026 goal
-    color: '#ef476f', // Red - high APR
-  },
-  amexDelta: {
-    name: 'Amex Delta',
-    original: 36420,
-    current: 9554.73,
-    apr: 22,
-    note: 'Primary payoff target',
-    category: 'target', // Part of May 2026 goal
-    color: '#4361ee', // Accent blue
-  },
   personalLoan: {
     name: 'Personal Loan',
-    original: 21000,
-    current: 14225, // Update with actual balance
+    original: 10000,
+    current: 8000,
     apr: 10,
-    note: 'Lending Club - 3yr term (Spring 2025)',
+    note: 'Example loan - 3yr term',
     category: 'termLoan', // Fixed payments, not part of May 2026 goal
     termMonths: 36,
     startDate: '2025-04-01',
@@ -53,8 +53,8 @@ const DEFAULT_DEBTS = {
   },
 };
 
-// September 2025 peak for target CC debt only (BofA + Amex)
-const SEPT_2025_CC_PEAK = 40077; // 3657 + 36420
+// Starting peak for target CC debt only (Card 1 + Card 2)
+const SEPT_2025_CC_PEAK = 13000; // 5000 + 8000
 
 // Target payoff date
 const TARGET_PAYOFF_DATE = new Date('2026-05-31');
@@ -135,12 +135,12 @@ export function useDebt() {
   const debtStats = useMemo(() => {
     const debtEntries = Object.entries(debts);
 
-    // Target debts only (BofA + Amex - the May 2026 goal)
+    // Target debts only (May 2026 payoff goal)
     const targetDebts = debtEntries.filter(
       ([, debt]) => debt.category === 'target'
     );
 
-    // Managed debts (Apple Card - under control)
+    // Managed debts (under control)
     const managedDebts = debtEntries.filter(
       ([, debt]) => debt.category === 'managed'
     );
@@ -230,7 +230,7 @@ export function useDebt() {
       .map(([key, debt]) => ({ key, name: debt.name }));
 
     return {
-      // Target CC debt stats (May 2026 goal - BofA + Amex)
+      // Target CC debt stats (May 2026 goal)
       currentTargetDebt,
       targetDebtPaidOff,
       targetPayoffPercentage,

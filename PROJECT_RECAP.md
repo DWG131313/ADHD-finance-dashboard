@@ -53,8 +53,8 @@ A React-based personal finance dashboard that imports CSV exports from Copilot (
 ### Phase 2: Debt Tracker ✅
 
 **Credit Card Debt Payoff**
-- Tracks BofA Atmos and Amex Delta (the May 2026 targets)
-- Progress from September 2025 peak ($40,077)
+- Tracks target credit cards with May 2026 payoff goal
+- Progress from starting debt peak
 - Overall percentage paid off with animated progress bar
 
 **Payoff Projections**
@@ -197,11 +197,11 @@ Certain transactions are automatically excluded from spending calculations:
 
 ### Credit Card Payment Exclusion
 
-**Problem**: "External Withdrawal - Applecard Gsbank - Payment" was showing as spending.
+**Problem**: Credit card payments were showing as spending.
 
 **Fix**: Added pattern matching to detect and exclude:
-- Credit card payments (Apple Card, Amex, BofA, Chase, etc.)
-- Loan payments (Lending Club, student loans)
+- Credit card payments (various card names)
+- Loan payments
 - ACH payments and wire transfers
 
 ### Debt Tracking Restructure
@@ -213,7 +213,7 @@ Certain transactions are automatically excluded from spending calculations:
 - Managed debts (under control)
 - Term loans (fixed payment schedule)
 
-Also updated Apple Card from $379 balance to $0 (paid off), and Personal Loan from $14,225 original to $21,000 (correct amount).
+System allows marking cards as paid off and updating loan balances.
 
 ### Income Tracking Addition
 
@@ -281,7 +281,7 @@ Users want to update frequently-changing data (debt balances) without navigating
 ## File Structure
 
 ```
-danny-finance-dashboard/
+adhd-finance-dashboard/
 ├── src/
 │   ├── App.jsx                    # Root component
 │   ├── index.css                  # Tailwind imports + theme
@@ -335,7 +335,7 @@ danny-finance-dashboard/
 ## Running the Project
 
 ```bash
-cd /Users/danny/CodingProjects/danny-finance-dashboard
+cd /Users/danny/CodingProjects/adhd-finance-dashboard
 npm run dev
 ```
 
