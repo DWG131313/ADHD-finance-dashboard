@@ -1,6 +1,8 @@
 # ADHD-Friendly Finance Dashboard
 
-> A personal finance tool built for a family member who needed clarity, not complexity.
+> A personal finance tool built for a family member who needed clarity, not complexity in helping her manage debt and finances.
+
+### Demo version: https://danny-finance-dashboard.vercel.app/
 
 ## The Story
 
