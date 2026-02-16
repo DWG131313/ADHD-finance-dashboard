@@ -66,6 +66,16 @@ After researching UX patterns for ADHD users, I learned about some common challe
 ### Key Design Choices
 
 - **Show progress, not just what's left**: Seeing "$5,000 paid off" is more motivating than "$8,000 remaining"
+## Screenshots
+
+### Focus Mode - Simplified Daily View
+![Focus Mode](focus-mode.png)
+*Clean, distraction-free interface showing what matters most: daily budget, next payday, next bill due, and debt progress.*
+
+### Dashboard Overview
+![Dashboard Overview](dashboard-overview.png)
+*Track budget spending, debt payoff progress, and upcoming bills - all with encouraging, compassionate messaging.*
+
 - **One action, one screen**: Minimal navigation required to see your status or update balances
 - **Smart defaults**: It should just work without requiring lots of configuration
 - **Compassionate messaging**: "Spending fast this week" not "You're over budget"
